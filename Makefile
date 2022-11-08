@@ -3,6 +3,7 @@ NAME = cub3d
 
 CC = cc
 C_FLAGS = -Wall -Wextra -Werror
+FRAM = -framework OpenGL -framework AppKit libraries/minilibx/libmlx.a
 
 LFT_PATH = ./libraries/libft/
 LFT_INC_PATH = ./libraries/libft/includes/
@@ -38,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C $(LFT_PATH)
 	@make -C $(MLX_PATH)
-	@$(CC) -o $@ -L $(LFT_PATH) $(MLX_PATH) -lft $^
+	@$(CC) -o $@ $(FRAM) -L $(LFT_PATH) -lft $^
 	@echo "Obj folder & files created"
 	@echo "Executable created"
 	@echo "Compilation finished"
