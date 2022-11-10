@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Leo <Leo@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/10 01:55:34 by Leo              ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 12:52:13 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define RESX 1280
 # define RESY 720
 
-# define MAP1 "maps/map01"
+# define MAP1 "maps/map04.cub"
 # define MAP2 "maps/map02"
 # define MAP3 "maps/map03"
 # define SKY "textures/sky.xpm"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Leo <Leo@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:04:10 by Leo               #+#    #+#             */
-/*   Updated: 2022/11/10 01:57:34 by Leo              ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 12:21:02 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,19 @@ static int	fill_map_next(char *line, t_data *data)
 		i = 0;
 		while (i < data->map_data.width)
 		{
-			//condition pour position joueur a noter
 			if (i < ft_strlen(line) && line[i] - '0' >= 0)
+			{
+				if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+					|| line[i] == 'E')
+					if (fill_pos_player(data, &line[i], i, j) == 1)
+						return (1);
 				data->map_data.map[j][i] = line[i] - '0';
+			}
 			else
 				data->map_data.map[j][i] = -1;
 			i++;
 		}
 		j++;
-		tmp = tmp->next;
 	}
 	return (0);
 }

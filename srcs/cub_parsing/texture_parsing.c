@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Leo <Leo@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:03:52 by Leo               #+#    #+#             */
-/*   Updated: 2022/11/10 00:33:56 by Leo              ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 13:30:36 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	fill_texture_xpm(char *line, t_data *data, int *i)
 			data->map_data.xpm[3] = new_line[1];
 		i++;
 	}
-	ft_free(new_line);
+	ft_free_char(new_line);
 	return (0);
 }
 
@@ -54,7 +54,7 @@ static int	fill_texture_rgb(char *line, t_data *data, int *i)
 			data->map_data.rgb[1] = new_line[1];
 		i++;
 	}
-	ft_free(new_line);
+	ft_free_char(new_line);
 	return (0);
 }
 
