@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Leo <Leo@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:36:06 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 01:55:34 by Leo              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
+# include <unistd.h>
 
 /*
  *	structure pour retenir l'axe X et Y en Int;
@@ -54,9 +55,27 @@ typedef struct		s_map
 {
 	int				x;
 	int				y;
-	int				**map;
+	int				**map; //map final, contient des entiers
+	char			**xpm;
+	char			**rgb;
+	int				width;
+	int				height;
 }					t_map;
 
+/*
+ *	informations sur les textures ;
+ */
+typedef struct s_texture
+{
+	void	*img;
+	int		bits_per_pixel;
+	int		endian;
+	char	*texture_path;
+	int		width;
+	int		height;
+	int		line_length;
+	void	*text_address;
+}	t_texture;
 /*
  *	informations sur l'image;
  */
@@ -97,6 +116,7 @@ typedef struct		s_data
 	int				**map;		//	ya pas besoin de ca
 	int				check;		//
 
+	t_map			map_data;
 	void			*mlx;
 	void			*win;
 	int				color;

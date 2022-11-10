@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: Leo <Leo@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:51:38 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:31:34 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/09 20:14:50 by Leo              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,33 @@ static int		cub_split_line(t_data *p)
 {
 	char		*line;
 	int			ret;
+	int			i;
+	int			len;
 
 	ret = 0;
+	i = 0;
 	if (get_next_line(p->fd, &line) == 1)
 	{
-		p->line = ft_split(line, ' ');
+		len = ft_strlen(line);
+		p->line = malloc(sizeof(char *) * len + 1);
+		if (!p->line)
+		{
+			free(p->line);
+			return (0);
+		}
+		while (line[i])
+		{
+			p->line[i] = malloc(sizeof(char) * 1);
+			if (!p->line[i])
+			{
+				wolf3d_freestr2d(p);
+				return (0);
+			}
+			p->line[i][0] = line[i];
+			p->line[i][1] = '\0';
+			i++;
+		}
+		p->line[len] = 0;
 		free(line);
 		++ret;
 	}
