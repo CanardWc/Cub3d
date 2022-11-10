@@ -6,7 +6,7 @@
 /*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:13:14 by lbounor           #+#    #+#             */
-/*   Updated: 2022/11/10 12:35:49 by lbounor          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 14:05:52 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ static void	set_values_player_plane(double p_x, double p_y, t_data *data)
 {
 	data->rplane.x = p_x;
 	data->rplane.y = p_y;
+}
+
+static void	fill_pos_player_next(t_data *data, char *c)
+{
+	if (*c == 'E')
+	{
+		set_values_player_dir(1, 0, data);
+		set_values_player_plane(0, 0.8, data);
+	}
+	else if (*c == 'W')
+	{
+		set_values_player_dir(-1, 0, data);
+		set_values_player_plane(0, -0.8, data);
+	}
 }
 
 int	fill_pos_player(t_data *data, char *c, int i, int j)
@@ -40,16 +54,8 @@ int	fill_pos_player(t_data *data, char *c, int i, int j)
 			set_values_player_dir(0, 1, data);
 			set_values_player_plane(-0.80, 0, data);
 		}
-		else if (*c == 'E')
-		{
-			set_values_player_dir(1, 0, data);
-			set_values_player_plane(0, 0.8, data);
-		}
-		else if (*c == 'W')
-		{
-			set_values_player_dir(-1, 0, data);
-			set_values_player_plane(0, -0.8, data);
-		}
+		else
+			fill_pos_player_next(data, c);
 		*c = '0';
 	}
 	else

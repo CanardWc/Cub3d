@@ -6,7 +6,7 @@
 /*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:03:52 by Leo               #+#    #+#             */
-/*   Updated: 2022/11/10 13:30:36 by lbounor          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 14:00:37 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,53 +58,37 @@ static int	fill_texture_rgb(char *line, t_data *data, int *i)
 	return (0);
 }
 
-int	parse_texture_xpm(int fd, t_data *data)
+static int	malloc_texture(t_data *data)
 {
-	char	*line;
-	int		ret;
-	int		i;
-
 	data->map_data.xpm = malloc(sizeof(char *) * 5);
 	if (!data->map_data.xpm)
 		return (1);
-	i = 0;
-	while (data->map_data.xpm[i] < 4)
-	{
-		ret = get_next_line(fd, &line);
-		if (ret == -1)
-			return (1);
-		if (ft_strlen(line) == 0)
-			continue ;
-		else if (fill_texture_xpm(line, data, &i) == 1)
-		{
-			free(line);
-			return (1);
-		}
-		free(line);
-		if (ret == 0)
-			break ;
-	}
+	data->map_data.rgb = malloc(sizeof(char *) * 3);
+	if (!data->map_data.rgb)
+		return (1);
 	return (0);
 }
 
-int	parse_texture_rgb(int fd, t_data *data)
+int	parse_texture(int fd, t_data *data)
 {
 	char	*line;
 	int		ret;
 	int		i;
+	int		j;
 
-	data->map_data.rgb = malloc(sizeof(char *) * 3);
-	if (!data->map_data.rgb)
-		return (1);
 	i = 0;
-	while (data->map_data.rgb[i] < 2)
+	j = 0;
+	if (malloc_texture(data) == 1)
+		return (1);
+	while (data->map_data.xpm[i] < 4 || data->map_data.rgb[j] < 2)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == -1)
 			return (1);
 		if (ft_strlen(line) == 0)
 			continue ;
-		else if (fill_texture_rgb(line, data, &i) == 1)
+		else if (fill_texture_xpm(line, data, &i) == 1
+			|| fill_texture_rgb(line, data, &j) == 1)
 		{
 			free(line);
 			return (1);

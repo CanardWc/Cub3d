@@ -6,7 +6,7 @@
 /*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:03:31 by Leo               #+#    #+#             */
-/*   Updated: 2022/11/10 13:34:21 by lbounor          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 13:57:42 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	main_parsing(char *file, t_data *data)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_exit("Error\nCannot open the map\n", fd, data);
-	if (parse_texture_xpm(fd, data) == 1)
-		ft_exit("Error\nInvalid information\n", fd, data);
-	if (parse_texture_rgb(fd, data) == 1)
+	if (parse_texture(fd, data) == 1)
 		ft_exit("Error\nInvalid information\n", fd, data);
 	if (parse_map(fd, data) == 1)
 		ft_exit("Error\nInvalid map\n", fd, data);

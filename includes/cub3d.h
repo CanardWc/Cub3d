@@ -6,7 +6,7 @@
 /*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/10 12:52:13 by lbounor          ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 15:22:05 by lbounor          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,19 @@ typedef struct		s_dxy
 }					t_dxy;
 
 /*
+ *	informations sur les couleurs ;
+ */
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+}	t_color;
+
+/*
  *	Coordonnees de la map et du parsing;
  */
-
-typedef struct		s_map
+typedef struct s_map
 {
 	int				x;
 	int				y;
@@ -60,6 +69,9 @@ typedef struct		s_map
 	char			**rgb;
 	int				width;
 	int				height;
+	t_color			color;
+	unsigned long	c; //ceiling
+	unsigned long	f; //floor
 }					t_map;
 
 /*
