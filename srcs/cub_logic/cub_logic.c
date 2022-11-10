@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:09:45 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:24:57 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 18:23:24 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	cub_setup(t_data *d)
 	// ces deux valeurs servent de futur adresses pour mlx_xpm_
 	int	win_x; // resolution en largeur.
 	int	win_y; // resolution en hauteur.
+
+	win_x = RESX;
+	win_y = RESY;
 	d->pos.x = 1.501; // data referent a quoi?
 	d->pos.y = 1.501; // idem, position?
 	d->dir.x = 1; // direction?
@@ -34,21 +37,28 @@ void	cub_setup(t_data *d)
 }
 
 /*
- *
- * c'est le main de notre logique de calcul;
- *
+ * 	c'est le main de notre logique de calcul;
+ * 	cub_moove re-calcule les valeurs de positions apres un event;
+ * 	cub_ray_logic gere la gestion de rayon, qui permet de calculer 
+ * 		les distances afin d'afficher les murs;
+ *	cub_put_map va remplir l'image avec les bonnes donnees;
+ *	mlx_clear_window efface l'image en place dans la fenetre;
+ *	mlx_put_image_to_window va placer l'image correspondante dans 
+ *		la fenetre;
+ *	sky represente le ciel;
+ *	img est l'image precalculee;
  */
 
 int		cub_logic(t_data *d)
 {
-	if (d->check == 0) // verificateur, on dirais qu'il verifie si la map est bien parsee?
+	if (d->check == 0) // verificateur, il verifie si la map est bien parsee
 		return (0);    // on peux vraiment faire sans je pense.
 	cub_moove(d); // events_capture, on y defini les nouvelles positions.
 	cub_ray_logic(d); // collision detector, visiblement on calcul ou les rayons vont taper. 
 	cub_put_map(d); // pixel_gestion, on y rempli l'image apres avoir calculer les rayons.
 	mlx_clear_window(d->mlx, d->win); // on suprime l'image dans la fenetre;
 	mlx_put_image_to_window(d->mlx, d->win, d->sky.im, 0, 0); // on place l'image sky box dans la fenetre;
-	mlx_put_image_to_window(d->mlx, d->win, d->sky.im, 0, 0); // on place l'image de l'environnement dans la fenetre;
+	mlx_put_image_to_window(d->mlx, d->win, d->img.im, 0, 0); // on place l'image de l'environnement dans la fenetre;
 	cub_hud(*d); // on place les lignes de texte qui compose l'hud;
 	return (0);
 }

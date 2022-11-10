@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:36:06 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 18:14:15 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # define RESX 1280
 # define RESY 720
 
-# define MAP1 "maps/map01"
-# define MAP2 "maps/map02"
-# define MAP3 "maps/map03"
-# define SKY "textures/sky.xpm"
+# define MAP1 "ressources/maps/map01"
+# define MAP2 "ressources/maps/map02"
+# define MAP3 "ressources/maps/map03"
+# define SKY "ressources/textures/sky.xpm"
 
 # include <libft.h>
 # include <fcntl.h>
@@ -59,6 +59,9 @@ typedef struct		s_map
 
 /*
  *	informations sur l'image;
+ *	permet de facilement s'oriente grace a:
+ *	imlen (pour l'axe y);
+ *	bpp (pour l'axe x);
  */
 
 typedef struct		s_img

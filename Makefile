@@ -47,7 +47,7 @@ $(NAME): $(OBJ)
 $(OBJ): | $(OBJ_PATH)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(C_FLAGS)  -fsanitize=address -g3 $(INC) $(LFT_INC) $(MLX_INC) -o $@ -c $<
+	@$(CC) $(C_FLAGS) $(INC) $(LFT_INC) $(MLX_INC) -o $@ -c $<
 
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

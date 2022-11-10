@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:18:26 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:35:27 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/10 18:16:44 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*
  * 	placement de l'hud de jeu
+ * 	i est la couleur affichee
  */
 
 void		cub_hud(t_data d)
@@ -22,9 +23,9 @@ void		cub_hud(t_data d)
 	int	y;
 	int	i;
 
-	x = 20; // largeur
-	y = 600; // hauteur
-	i = 0x00FF00; // couleur;
+	x = 20;
+	y = 600;
+	i = 0x00FF00;
 	mlx_string_put(d.mlx, d.win, x, y + 32, i, "Moove : wasd / Arrows");
 	mlx_string_put(d.mlx, d.win, x, y + 48, i, "Speed :    + / -     ");
 	mlx_string_put(d.mlx, d.win, x, y + 64, i, "Reset :      0       ");
