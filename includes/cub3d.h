@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/10 18:14:15 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 20:42:59 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,17 @@
 # define MAP1 "ressources/maps/map01"
 # define MAP2 "ressources/maps/map02"
 # define MAP3 "ressources/maps/map03"
-# define SKY "ressources/textures/sky.xpm"
+# define SKY "ressources/textures/skybox/sky.xpm"
+
+# define TMP_NO "ressources/textures/walls/Sr1.xpm"
+# define TMP_SO "ressources/textures/walls/White4.xpm"
+# define TMP_WE "ressources/textures/walls/Wall2.xpm"
+# define TMP_EA "ressources/textures/walls/Wall1.xpm"
+
+# define NORTH 1
+# define SOUTH 2
+# define WEST 3
+# define EAST 4
 
 # include <libft.h>
 # include <fcntl.h>
@@ -107,6 +117,13 @@ typedef struct		s_data
 	t_img			img;
 	t_img			sky;
 
+	int				ceil_color;
+	int				floor_color;
+	t_img			w_no;
+	t_img			w_so;
+	t_img			w_we;
+	t_img			w_ea;
+
 	t_ray			r;
 	int				wall;
 	int				hit;
@@ -115,6 +132,7 @@ typedef struct		s_data
 	t_dxy			rplane;
 	t_ixy			rmap;
 	t_ixy			step;
+	double			pw_dist;				
 
 	int				wstart;
 	int				wend;
@@ -134,7 +152,7 @@ int					cub_key_release(int keycode, t_data *d);
 
 void				cub_put_pixel(t_data *d, int x, int y, int color);
 int					cub_logic(t_data *d);
-void				cub_fill_columns(t_data *d, int x);
+void				cub_fill_columns(t_data *d, int x, t_img texture);
 void				cub_ray_logic(t_data *d);
 void				cub_moove(t_data *d);
 void				cub_setup(t_data *d);

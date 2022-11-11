@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:40:19 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/11 12:17:58 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 20:24:53 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,13 @@ static void	cub_ray_hit(t_data *d)
 
 static void cub_ray_sizing(t_data *d)
 {
-	double	dist;
-
 	if (d->wall == 0)
-		dist = fabs((d->rmap.x - d->r.pos.x \
+		d->pw_dist = fabs((d->rmap.x - d->r.pos.x \
 					+ (1 - d->step.x) / 2) / d->r.dir.x);
 	else
-		dist = fabs((d->rmap.y - d->r.pos.y \
+		d->pw_dist = fabs((d->rmap.y - d->r.pos.y \
 					+ (1 - d->step.y) / 2) / d->r.dir.y);
-	d->rh = abs((int)(RESY / dist));
+	d->rh = abs((int)(RESY / d->pw_dist));
 	d->wstart = (-1 * (d->rh)) / 2 + RESY / 2;
 	if (d->wstart < 0)
 		d->wstart = 0;
@@ -123,10 +121,26 @@ void		cub_ray_logic(t_data *d)
 		cub_ray_parsing(d);
 		cub_ray_hit(d);
 		cub_ray_sizing(d);
+		if (d->wall == 0)
+		{
+			if (d->step.x < 0)
+				cub_fill_columns(d, x++, d->w_no);
+			else
+				cub_fill_columns(d, x++, d->w_so);
+		}
+		else
+		{
+			if (d->step.y < 0)
+				cub_fill_columns(d, x++, d->w_we);
+			else
+				cub_fill_columns(d, x++, d->w_ea);
+		}
+		/*
 		if (d->wall == 0) // C'EST LA LES COULEURS DES MURS DONC FAUDRA METTRE LES TEXTURES LA;
-			d->color = (d->step.x < 0 ? 0x99004C : 0xFF0000); // Nord | Sud
+			d->c = (d->step.x < 0 ? 0x99004C : 0xFF0000); // Nord | Sud
 		else
 			d->color = (d->step.y < 0 ? 0x0000FF : 0xFF9933); // Ouest | Est
 		cub_fill_columns(d, x++);
+		*/
 	}
 }
