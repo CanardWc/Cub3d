@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:40:19 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/08 17:34:47 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 12:17:58 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	cub_ray_hit(t_data *d)
 		{
 			d->r.dist.y += d->r.disd.y;
 			d->rmap.y += d->step.y;
-			d->wall = 0;
+			d->wall = 1;
 		}
 		if (d->map[d->rmap.x][d->rmap.y] == 1)
 			d->hit = 1;
@@ -124,9 +124,9 @@ void		cub_ray_logic(t_data *d)
 		cub_ray_hit(d);
 		cub_ray_sizing(d);
 		if (d->wall == 0) // C'EST LA LES COULEURS DES MURS DONC FAUDRA METTRE LES TEXTURES LA;
-			d->color = (d->step.x < 0 ? 0x99004C : 0xFF0000);
+			d->color = (d->step.x < 0 ? 0x99004C : 0xFF0000); // Nord | Sud
 		else
-			d->color = (d->step.y < 0 ? 0x0000FF : 0xFF9933);
+			d->color = (d->step.y < 0 ? 0x0000FF : 0xFF9933); // Ouest | Est
 		cub_fill_columns(d, x++);
 	}
 }

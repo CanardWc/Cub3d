@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:18:26 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/10 18:16:44 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/11 10:54:28 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		cub_put_map(t_data *d)
 	if (d->cmap.x * 5 > RESX / 2 || d->cmap.y * 5 > RESY / 2)
 		return ;
 	i = -1;
-	while (++i < d->cmap.y)
+	while (++i < d->cmap.x)
 	{
 		j = -1;
 		while (++j < d->cmap.y)

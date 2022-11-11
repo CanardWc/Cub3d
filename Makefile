@@ -44,7 +44,7 @@ $(NAME): $(OBJ)
 	@echo "Executable created"
 	@echo "Compilation finished"
 
-$(OBJ): | $(OBJ_PATH)
+$(OBJ): $(INC_PATH)$(INC_NAME) | $(OBJ_PATH) 
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(C_FLAGS) $(INC) $(LFT_INC) $(MLX_INC) -o $@ -c $<

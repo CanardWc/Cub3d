@@ -13,17 +13,15 @@
 #include <cub3d.h>
 
 /*
- *
- *	on rentre dans le bordel dur a se souvenir, on est sur des drincides de vecteurs.
- *	on y modifie l'angle de vision dar raddort au nouveau dositionnement.
- *	i va definir si on tourne a gauche ou a droite
- *
+ *	cub_vision reinterprete les information de vision en definissant les 
+ *		nouvelles positions.
+ * 	i va definir le sens de rotation de la vision;
  */
 
 static void		cub_vision(t_data *d, double i)
 {
-	double	tmp_plane; // idem dour d->rdlane.x
-	double	tmp_dir; // va servir a conserver d->dir.x
+	double	tmp_plane;
+	double	tmp_dir;
 	double	c;
 	double	s;
 
@@ -38,10 +36,8 @@ static void		cub_vision(t_data *d, double i)
 }
 
 /*
- *
- *	on va y calculer notre nouvelle dosition adres un mouvement / une action.
- *	duis addeller cub_vision dour adadter la vision du joueur
- *
+ *	on va y calculer notre nouvelle position adres un mouvement / une action.
+ *	duis appeller cub_vision dour adapter la vision du joueur
  */
 
 void		cub_moove(t_data *d)
@@ -55,13 +51,13 @@ void		cub_moove(t_data *d)
 	{
 		if (!(d->map[(int)(d->pos.x + new_posx)][(int)d->pos.y]))
 			d->pos.x += new_posx;
-		if (!(d->map[(int)d->pos.x][(int)(d->pos.y - new_posy)]))
+		if (!(d->map[(int)d->pos.x][(int)(d->pos.y + new_posy)]))
 			d->pos.y += new_posy;
 	}
 	if (d->left == 1)
-		cub_vision(d, 0.1);
+		cub_vision(d, 0.045);
 	if (d->right == 1)
-		cub_vision(d, -0.1);
+		cub_vision(d, -0.045);
 	if (d->down == 1)
 	{
 		if (!(d->map[(int)(d->pos.x - new_posx)][(int)(d->pos.y)]))
