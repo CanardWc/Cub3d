@@ -6,7 +6,7 @@
 /*   By: lbounor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:41:32 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/14 13:56:43 by lbounor          ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 17:06:32 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct		s_img
 	int				imlen;
 	int				bpp;
 	int				endi;
+	int				img_w;
+	int				img_h;
 }					t_img;
 
 /*
@@ -129,7 +131,7 @@ typedef struct		s_data
 	int				hit;
 	t_dxy			pos;
 	t_dxy			dir;
-	t_dxy			rplane;
+	t_dxy			plane;
 	t_ixy			rmap;
 	t_ixy			step;
 	double			pw_dist;				

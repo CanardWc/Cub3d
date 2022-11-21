@@ -6,7 +6,7 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:40:19 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/11 20:24:53 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 14:49:15 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	cub_ray_setup(t_data *d, int x)
 	d->r.cam = 2 * x / (double)(RESX) - 1;
 	d->r.pos.x = d->pos.x;
 	d->r.pos.y = d->pos.y;
-	d->r.dir.x = d->dir.x + d->rplane.x * d->r.cam;
-	d->r.dir.y = d->dir.y + d->rplane.y * d->r.cam;
+	d->r.dir.x = d->dir.x + d->plane.x * d->r.cam;
+	d->r.dir.y = d->dir.y + d->plane.y * d->r.cam;
 	d->rmap.x = (int)d->r.pos.x;
 	d->rmap.y = (int)d->r.pos.y;
 	d->r.disd.x = sqrt(1 + (d->r.dir.y * d->r.dir.y) / \
@@ -115,7 +115,7 @@ void		cub_ray_logic(t_data *d)
 	int	x;
 	
 	x = 0;
-	while (x < RESX)
+	while (x <= RESX)
 	{
 		cub_ray_setup(d, x);
 		cub_ray_parsing(d);

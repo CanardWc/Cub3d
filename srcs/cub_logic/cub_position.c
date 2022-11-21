@@ -28,11 +28,11 @@ static void		cub_vision(t_data *d, double i)
 	c = cos(i);
 	s = sin(i);
 	tmp_dir = d->dir.x;
-	tmp_plane = d->rplane.x;
+	tmp_plane = d->plane.x;
 	d->dir.x = d->dir.x * c - d->dir.y * s;
 	d->dir.y = tmp_dir * s + d->dir.y * c;
-	d->rplane.x = d->rplane.x * c - d->rplane.y * s;
-	d->rplane.y = tmp_plane * s + d->rplane.y * c;
+	d->plane.x = d->plane.x * c - d->plane.y * s;
+	d->plane.y = tmp_plane * s + d->plane.y * c;
 }
 
 /*

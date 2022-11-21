@@ -6,38 +6,43 @@
 /*   By: fgrea <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:09:45 by fgrea             #+#    #+#             */
-/*   Updated: 2022/11/11 20:45:53 by fgrea            ###   ########lyon.fr   */
+/*   Updated: 2022/11/21 13:22:07 by fgrea            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
 /*
- *	cub_setup_textures setup les textures avec mlx_xpm_file_to_image puis
+ *	cub_setup_textures setup grace a  mlx_xpm_file_to_image puis
  *		mlx_get_data_addr afin de pouvoir traiter rapidement les calculs
+ *		concernant le traitement de texture;
+ *		
+ *		TMP A REMPLACEY
  */
 
 void	cub_setup_textures(t_data *d)
 {
+	/*
 	// ces deux valeurs servent de futur adresses pour mlx_xpm_
-	int	win_x; // resolution en largeur.
-	int	win_y; // resolution en hauteur.
+	int	win_x; // resolution en largeur de la texture;
+	int	win_y; // resolution en hauteur de la texture;
 
 	win_x = RESX;
 	win_y = RESY;
-	d->w_no.im = mlx_xpm_file_to_image(d->mlx, TMP_NO, &win_x, &win_y);
+	*/
+	d->w_no.im = mlx_xpm_file_to_image(d->mlx, TMP_NO, &d->w_no.img_w, &d->w_no.img_h);
 	d->w_no.imc = mlx_get_data_addr(d->w_no.im, &d->w_no.bpp, &d->w_no.imlen, \
 			&d->w_no.endi);
-	d->w_so.im = mlx_xpm_file_to_image(d->mlx, TMP_SO, &win_x, &win_y);
+	d->w_so.im = mlx_xpm_file_to_image(d->mlx, TMP_SO, &d->w_so.img_w, &d->w_so.img_h);
 	d->w_so.imc = mlx_get_data_addr(d->w_so.im, &d->w_so.bpp, &d->w_so.imlen, \
 			&d->w_so.endi);
-	d->w_we.im = mlx_xpm_file_to_image(d->mlx, TMP_WE, &win_x, &win_y);
+	d->w_we.im = mlx_xpm_file_to_image(d->mlx, TMP_WE, &d->w_we.img_w, &d->w_we.img_h);
 	d->w_we.imc = mlx_get_data_addr(d->w_we.im, &d->w_we.bpp, &d->w_we.imlen, \
 			&d->w_we.endi);
-	d->w_ea.im = mlx_xpm_file_to_image(d->mlx, TMP_EA, &win_x, &win_y);
+	d->w_ea.im = mlx_xpm_file_to_image(d->mlx, TMP_EA, &d->w_ea.img_w, &d->w_ea.img_h);
 	d->w_ea.imc = mlx_get_data_addr(d->w_ea.im, &d->w_ea.bpp, &d->w_ea.imlen, \
 			&d->w_ea.endi);
-	d->sky.im = mlx_xpm_file_to_image(d->mlx, SKY, &win_x, &win_y);
+	d->sky.im = mlx_xpm_file_to_image(d->mlx, SKY, &d->sky.img_w, &d->sky.img_h);
 	d->sky.imc = mlx_get_data_addr(d->sky.im, &d->sky.bpp, &d->sky.imlen, \
 			&d->sky.endi);
 }
@@ -48,12 +53,12 @@ void	cub_setup_textures(t_data *d)
 
 void	cub_setup(t_data *d)
 {
-	d->pos.x = 1.501; // data referent a quoi?
-	d->pos.y = 1.501; // idem, position?
-	d->dir.x = 1; // direction?
-	d->dir.y = 0;
-	d->rplane.x = 0; // un plan?
-	d->rplane.y = -0.80; // on dirais un point de vue.
+	d->pos.x = 1.501; // LA POSITION DE DEPART;
+	d->pos.y = 1.501; // MEM EN Y
+	d->dir.x = 1; // vecteur de direction initial
+	d->dir.y = 0; // la meme en y;
+	d->plane.x = 0; // plan de vue camera
+	d->plane.y = -0.80; // mem en y
 	d->speed = 0.1; // ca c'est pour la vitesse de deplacement de base.
 	cub_setup_textures(d);
 }
@@ -80,9 +85,7 @@ int		cub_logic(t_data *d)
 	cub_put_map(d); // pixel_gestion, on y rempli l'image apres avoir calculer les rayons.
 	mlx_clear_window(d->mlx, d->win); // on suprime l'image dans la fenetre;
 	mlx_put_image_to_window(d->mlx, d->win, d->sky.im, 0, 0); // on place l'image sky box dans la fenetre;
-	ft_printf("la?\n");
 	mlx_put_image_to_window(d->mlx, d->win, d->img.im, 0, 0); // on place l'image de l'environnement dans la fenetre;
-	ft_printf("non?\n");
 	cub_hud(*d); // on place les lignes de texte qui compose l'hud;
 	return (0);
 }
